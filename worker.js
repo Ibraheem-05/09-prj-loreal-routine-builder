@@ -13,6 +13,15 @@ const ALLOWED_ORIGINS = [
   "http://127.0.0.1:5500",
 ];
 
+// GitHub Codespaces preview pages look like https://name-3000.app.github.dev,
+// so we also allow any address that matches this pattern.
+function isAllowedOrigin(origin) {
+  return (
+    ALLOWED_ORIGINS.includes(origin) ||
+    /^https:\/\/[a-z0-9-]+\.app\.github\.dev$/.test(origin)
+  );
+}
+
 // The Worker always uses its own instructions, so visitors can't change them.
 const SYSTEM_PROMPT =
   "You are a friendly L'Oréal skincare and beauty advisor. " +
@@ -29,7 +38,7 @@ export default {
 
     // CORS headers let the browser page talk to this Worker.
     const corsHeaders = {
-      "Access-Control-Allow-Origin": ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0],
+      "Access-Control-Allow-Origin": isAllowedOrigin(origin) ? origin : ALLOWED_ORIGINS[0],
       "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
       "Vary": "Origin",
@@ -60,7 +69,7 @@ export default {
     if (request.method !== "POST") {
       return reply({ error: "Use POST to send a chat message." }, 405);
     }
-    if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+    if (origin && !isAllowedOrigin(origin)) {
       return reply({ error: "Origin not allowed." }, 403);
     }
     if (!env.OPENAI_API_KEY) {
