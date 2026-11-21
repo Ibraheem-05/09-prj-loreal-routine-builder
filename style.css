@@ -81,6 +81,31 @@ body {
   margin-bottom: 20px;
 }
 
+.chat-message {
+  max-width: 85%;
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.chat-message p + p {
+  margin-top: 8px;
+}
+
+.chat-message.user {
+  margin-left: auto;
+  background: #000;
+  color: #fff;
+}
+
+.chat-message.assistant {
+  background: #ececec;
+  color: #333;
+}
+
 /* placeholder message */
 .placeholder-message {
   width: 100%;
@@ -186,6 +211,21 @@ body {
   display: flex;
   gap: 15px;
   min-height: 160px;
+  cursor: pointer;
+  transition: border 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover,
+.product-card:focus {
+  border-color: #000;
+  outline: none;
+  box-shadow: 0 0 0 2px #000;
+}
+
+.product-card.selected {
+  border: 3px solid #000;
+  background-color: #f3f3f3;
+  padding: 13px;
 }
 
 .product-card img {
@@ -213,6 +253,34 @@ body {
   color: #666;
 }
 
+.details-btn {
+  align-self: flex-start;
+  margin-top: 10px;
+  padding: 6px 8px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background: #fff;
+  color: #000;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.details-btn:focus {
+  outline: 2px solid #000;
+  outline-offset: 2px;
+}
+
+.product-description {
+  display: none;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+.product-description.open {
+  display: block;
+}
+
 /* selected products */
 .selected-products {
   margin: 40px 0;
@@ -230,6 +298,41 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.selected-placeholder {
+  color: #666;
+  font-size: 14px;
+}
+
+.selected-product {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #000;
+  border-radius: 20px;
+  background: #f3f3f3;
+  font-size: 14px;
+}
+
+.remove-product {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+.remove-product:hover,
+.remove-product:focus {
+  background: #666;
+  outline: 2px solid #000;
+  outline-offset: 2px;
 }
 
 .generate-btn {
