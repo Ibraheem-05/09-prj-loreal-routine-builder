@@ -1,14 +1,3 @@
-/* —— L'Oréal brand colors —— */
-:root {
-  --brand-red: #ff003b;
-  --brand-red-dark: #c70030;
-  --brand-gold: #e3a535;
-  --brand-gold-soft: #fff6e3;
-  --ink: #1b1b1b;
-  --muted: #666;
-  --line: #d9d9d9;
-}
-
 /* —— basic reset —— */
 * {
   box-sizing: border-box;
@@ -19,17 +8,9 @@
 /* —— body + fonts —— */
 body {
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  color: var(--ink);
+  color: #333;
   display: flex;
   justify-content: center;
-}
-
-/* Arabic needs a font that has Arabic letters */
-:lang(ar) body,
-html:lang(ar) button,
-html:lang(ar) input,
-html:lang(ar) select {
-  font-family: "Noto Sans Arabic", "Montserrat", Arial, sans-serif;
 }
 
 .page-wrapper {
@@ -37,36 +18,15 @@ html:lang(ar) select {
   max-width: 900px;
 }
 
-/* language switch (top corner of the page) */
-.language-bar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; /* flips to the left side automatically in RTL */
-  gap: 8px;
-  padding-top: 16px;
-  font-size: 14px;
-  color: var(--muted);
-}
-
-.language-bar select {
-  padding: 6px 10px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: #fff;
-  font: inherit;
-  cursor: pointer;
-}
-
 /* header */
 .site-header {
   text-align: center;
-  padding-top: 24px;
+  padding-top: 50px;
   padding-bottom: 10px;
 }
 
 .logo {
   width: 250px;
-  max-width: 70%;
   margin-bottom: 15px;
 }
 
@@ -76,56 +36,32 @@ html:lang(ar) select {
   margin-bottom: 10px;
 }
 
-/* small red + gold bar under the title */
-.title-accent {
-  display: block;
-  width: 90px;
-  height: 4px;
-  margin: 0 auto;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--brand-red) 50%, var(--brand-gold) 50%);
-}
-
-/* product search + category filter */
+/* category filter */
 .search-section {
   margin: 30px 0;
   display: flex;
-  gap: 12px;
 }
 
-.search-section input,
 .search-section select {
+  width: 100%;
   padding: 16px;
   font-size: 18px;
-  border: 2px solid var(--ink);
+  border: 2px solid #000;
   border-radius: 8px;
+  cursor: pointer;
   background-color: white;
   font-weight: 500;
-  font-family: inherit;
 }
 
-.search-section input {
-  flex: 2;
-  min-width: 0;
-}
-
-.search-section select {
-  flex: 1;
-  min-width: 0;
-  cursor: pointer;
-}
-
-.search-section input:focus,
 .search-section select:focus {
   outline: none;
-  border-color: var(--brand-red);
-  box-shadow: 0 0 0 3px var(--brand-gold);
+  border-color: #666;
 }
 
 /* chat section */
 .chatbox {
   margin: 40px 0;
-  border: 2px solid var(--ink);
+  border: 2px solid #000;
   border-radius: 8px;
   padding: 26px;
 }
@@ -139,7 +75,7 @@ html:lang(ar) select {
   padding: 20px;
   font-size: 18px;
   line-height: 1.5;
-  height: 320px;
+  height: 250px;
   overflow-y: auto;
   background: #fafafa;
   margin-bottom: 20px;
@@ -159,21 +95,15 @@ html:lang(ar) select {
   margin-top: 8px;
 }
 
-.chat-message a {
-  color: var(--brand-red-dark);
-  text-decoration: underline;
-}
-
 .chat-message.user {
-  margin-inline-start: auto; /* pushes user bubbles to the right (left in RTL) */
-  background: var(--brand-red);
+  margin-left: auto;
+  background: #000;
   color: #fff;
 }
 
 .chat-message.assistant {
-  background: var(--brand-gold-soft);
-  border-inline-start: 4px solid var(--brand-gold);
-  color: var(--ink);
+  background: #ececec;
+  color: #333;
 }
 
 /* placeholder message */
@@ -181,7 +111,7 @@ html:lang(ar) select {
   width: 100%;
   text-align: center;
   padding: 40px;
-  color: var(--muted);
+  color: #666;
   font-size: 18px;
 }
 
@@ -199,20 +129,18 @@ html:lang(ar) select {
   border: none;
   border-bottom: 2px solid #ccc;
   background: transparent;
-  font-family: inherit;
 }
 
 .chat-form input:focus {
   outline: none;
-  border-bottom-color: var(--brand-red);
+  border-bottom-color: #000;
 }
 
 .chat-form button {
   font-size: 18px;
-  background: var(--brand-red);
+  background: #000;
   color: #fff;
   border: none;
-  border-radius: 8px;
   padding: 12px;
   width: 48px;
   height: 48px;
@@ -224,22 +152,12 @@ html:lang(ar) select {
 }
 
 .chat-form button:hover {
-  background: var(--brand-red-dark);
+  background: #666666;
 }
 
-.chat-form button:focus-visible {
-  outline: 2px solid var(--brand-gold);
+.chat-form button:focus {
+  outline: 2px solid #000;
   outline-offset: 2px;
-}
-
-button:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-/* the paper-plane icon should point left in RTL */
-[dir="rtl"] .fa-paper-plane {
-  transform: scaleX(-1);
 }
 
 /* visually hidden */
@@ -260,7 +178,7 @@ button:disabled {
   margin: 60px 0 40px;
   text-align: center;
   font-size: 14px;
-  color: var(--muted);
+  color: #666;
 }
 
 .site-footer nav {
@@ -269,12 +187,12 @@ button:disabled {
 
 .site-footer a {
   margin: 0 8px;
-  color: var(--ink);
+  color: #000;
   text-decoration: none;
 }
 
 .site-footer a:hover {
-  color: var(--brand-red);
+  color: #666666;
 }
 
 /* products grid */
@@ -299,15 +217,14 @@ button:disabled {
 
 .product-card:hover,
 .product-card:focus {
-  border-color: var(--brand-gold);
+  border-color: #000;
   outline: none;
-  box-shadow: 0 0 0 2px var(--brand-gold);
+  box-shadow: 0 0 0 2px #000;
 }
 
-/* selected cards get a red border and a soft gold background */
 .product-card.selected {
-  border: 3px solid var(--brand-red);
-  background-color: var(--brand-gold-soft);
+  border: 3px solid #000;
+  background-color: #f3f3f3;
   padding: 13px;
 }
 
@@ -333,29 +250,24 @@ button:disabled {
 
 .product-card p {
   font-size: 14px;
-  color: var(--muted);
+  color: #666;
 }
 
 .details-btn {
   align-self: flex-start;
   margin-top: 10px;
   padding: 6px 8px;
-  border: 1px solid var(--ink);
+  border: 1px solid #000;
   border-radius: 4px;
   background: #fff;
-  color: var(--ink);
+  color: #000;
   font: inherit;
   font-size: 13px;
   cursor: pointer;
 }
 
-.details-btn:hover {
-  border-color: var(--brand-red);
-  color: var(--brand-red);
-}
-
-.details-btn:focus-visible {
-  outline: 2px solid var(--brand-gold);
+.details-btn:focus {
+  outline: 2px solid #000;
   outline-offset: 2px;
 }
 
@@ -373,40 +285,13 @@ button:disabled {
 .selected-products {
   margin: 40px 0;
   padding: 20px;
-  border: 2px solid var(--ink);
+  border: 2px solid #000;
   border-radius: 8px;
-}
-
-.selected-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 20px;
 }
 
 .selected-products h2 {
   font-size: 20px;
-}
-
-.clear-btn {
-  padding: 6px 12px;
-  border: 1px solid var(--brand-red);
-  border-radius: 20px;
-  background: #fff;
-  color: var(--brand-red);
-  font: inherit;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.clear-btn[hidden] {
-  display: none;
-}
-
-.clear-btn:hover {
-  background: var(--brand-red);
-  color: #fff;
+  margin-bottom: 20px;
 }
 
 #selectedProductsList {
@@ -416,7 +301,7 @@ button:disabled {
 }
 
 .selected-placeholder {
-  color: var(--muted);
+  color: #666;
   font-size: 14px;
 }
 
@@ -426,9 +311,9 @@ button:disabled {
   gap: 8px;
   max-width: 100%;
   padding: 8px 10px;
-  border: 1px solid var(--brand-gold);
+  border: 1px solid #000;
   border-radius: 20px;
-  background: var(--brand-gold-soft);
+  background: #f3f3f3;
   font-size: 14px;
 }
 
@@ -438,15 +323,15 @@ button:disabled {
   flex-shrink: 0;
   border: none;
   border-radius: 50%;
-  background: var(--brand-red);
+  background: #000;
   color: #fff;
   cursor: pointer;
 }
 
 .remove-product:hover,
-.remove-product:focus-visible {
-  background: var(--brand-red-dark);
-  outline: 2px solid var(--brand-gold);
+.remove-product:focus {
+  background: #666;
+  outline: 2px solid #000;
   outline-offset: 2px;
 }
 
@@ -456,9 +341,8 @@ button:disabled {
   padding: 16px;
   font-size: 18px;
   font-weight: 500;
-  font-family: inherit;
   color: #fff;
-  background: var(--brand-red);
+  background: #000;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -466,25 +350,93 @@ button:disabled {
 }
 
 .generate-btn:hover {
-  background: var(--brand-red-dark);
-}
-
-.generate-btn:focus-visible {
-  outline: 3px solid var(--brand-gold);
-  outline-offset: 2px;
+  background: #666;
 }
 
 .generate-btn i {
-  margin-inline-end: 8px;
+  margin-right: 8px;
 }
 
-/* phones and small tablets */
+/* —— added controls (original black/grey look) —— */
+.language-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  padding-top: 15px;
+  font-size: 14px;
+}
+
+.language-bar select {
+  padding: 6px 8px;
+  border: 1px solid #000;
+  border-radius: 6px;
+  background: #fff;
+  font-family: inherit;
+}
+
+.search-section {
+  gap: 12px;
+}
+
+.search-section input[type="search"] {
+  flex: 1;
+  padding: 16px;
+  font-size: 18px;
+  font-family: inherit;
+  border: 2px solid #000;
+  border-radius: 8px;
+}
+
+.search-section input[type="search"]:focus {
+  outline: none;
+  border-color: #666;
+}
+
+.search-section select {
+  flex: 1;
+}
+
+.selected-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clear-btn {
+  padding: 8px 14px;
+  border: 1px solid #000;
+  border-radius: 6px;
+  background: #fff;
+  color: #000;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.clear-btn:hover {
+  background: #f3f3f3;
+}
+
+.clear-btn[hidden] {
+  display: none;
+}
+
+.chat-message a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* right-to-left support */
+[dir="rtl"] body {
+  font-family: "Noto Sans Arabic", "Montserrat", Arial, sans-serif;
+}
+
+[dir="rtl"] .fa-paper-plane {
+  transform: scaleX(-1);
+}
+
 @media (max-width: 700px) {
   .search-section {
     flex-direction: column;
-  }
-
-  .product-card {
-    flex: 1 1 100%;
   }
 }
