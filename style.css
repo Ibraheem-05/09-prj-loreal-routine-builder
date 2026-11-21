@@ -1,3 +1,14 @@
+/* —— L'Oréal brand colors —— */
+:root {
+  --brand-red: #ff003b;
+  --brand-red-dark: #c70030;
+  --brand-gold: #e3a535;
+  --brand-gold-soft: #fff6e3;
+  --ink: #1b1b1b;
+  --muted: #666;
+  --line: #d9d9d9;
+}
+
 /* —— basic reset —— */
 * {
   box-sizing: border-box;
@@ -8,9 +19,17 @@
 /* —— body + fonts —— */
 body {
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  color: #333;
+  color: var(--ink);
   display: flex;
   justify-content: center;
+}
+
+/* Arabic needs a font that has Arabic letters */
+:lang(ar) body,
+html:lang(ar) button,
+html:lang(ar) input,
+html:lang(ar) select {
+  font-family: "Noto Sans Arabic", "Montserrat", Arial, sans-serif;
 }
 
 .page-wrapper {
@@ -18,15 +37,36 @@ body {
   max-width: 900px;
 }
 
+/* language switch (top corner of the page) */
+.language-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* flips to the left side automatically in RTL */
+  gap: 8px;
+  padding-top: 16px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.language-bar select {
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
 /* header */
 .site-header {
   text-align: center;
-  padding-top: 50px;
+  padding-top: 24px;
   padding-bottom: 10px;
 }
 
 .logo {
   width: 250px;
+  max-width: 70%;
   margin-bottom: 15px;
 }
 
@@ -36,32 +76,56 @@ body {
   margin-bottom: 10px;
 }
 
-/* category filter */
+/* small red + gold bar under the title */
+.title-accent {
+  display: block;
+  width: 90px;
+  height: 4px;
+  margin: 0 auto;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--brand-red) 50%, var(--brand-gold) 50%);
+}
+
+/* product search + category filter */
 .search-section {
   margin: 30px 0;
   display: flex;
+  gap: 12px;
+}
+
+.search-section input,
+.search-section select {
+  padding: 16px;
+  font-size: 18px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background-color: white;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.search-section input {
+  flex: 2;
+  min-width: 0;
 }
 
 .search-section select {
-  width: 100%;
-  padding: 16px;
-  font-size: 18px;
-  border: 2px solid #000;
-  border-radius: 8px;
+  flex: 1;
+  min-width: 0;
   cursor: pointer;
-  background-color: white;
-  font-weight: 500;
 }
 
+.search-section input:focus,
 .search-section select:focus {
   outline: none;
-  border-color: #666;
+  border-color: var(--brand-red);
+  box-shadow: 0 0 0 3px var(--brand-gold);
 }
 
 /* chat section */
 .chatbox {
   margin: 40px 0;
-  border: 2px solid #000;
+  border: 2px solid var(--ink);
   border-radius: 8px;
   padding: 26px;
 }
@@ -75,7 +139,7 @@ body {
   padding: 20px;
   font-size: 18px;
   line-height: 1.5;
-  height: 250px;
+  height: 320px;
   overflow-y: auto;
   background: #fafafa;
   margin-bottom: 20px;
@@ -95,15 +159,21 @@ body {
   margin-top: 8px;
 }
 
+.chat-message a {
+  color: var(--brand-red-dark);
+  text-decoration: underline;
+}
+
 .chat-message.user {
-  margin-left: auto;
-  background: #000;
+  margin-inline-start: auto; /* pushes user bubbles to the right (left in RTL) */
+  background: var(--brand-red);
   color: #fff;
 }
 
 .chat-message.assistant {
-  background: #ececec;
-  color: #333;
+  background: var(--brand-gold-soft);
+  border-inline-start: 4px solid var(--brand-gold);
+  color: var(--ink);
 }
 
 /* placeholder message */
@@ -111,7 +181,7 @@ body {
   width: 100%;
   text-align: center;
   padding: 40px;
-  color: #666;
+  color: var(--muted);
   font-size: 18px;
 }
 
@@ -129,18 +199,20 @@ body {
   border: none;
   border-bottom: 2px solid #ccc;
   background: transparent;
+  font-family: inherit;
 }
 
 .chat-form input:focus {
   outline: none;
-  border-bottom-color: #000;
+  border-bottom-color: var(--brand-red);
 }
 
 .chat-form button {
   font-size: 18px;
-  background: #000;
+  background: var(--brand-red);
   color: #fff;
   border: none;
+  border-radius: 8px;
   padding: 12px;
   width: 48px;
   height: 48px;
@@ -152,12 +224,22 @@ body {
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: var(--brand-red-dark);
 }
 
-.chat-form button:focus {
-  outline: 2px solid #000;
+.chat-form button:focus-visible {
+  outline: 2px solid var(--brand-gold);
   outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* the paper-plane icon should point left in RTL */
+[dir="rtl"] .fa-paper-plane {
+  transform: scaleX(-1);
 }
 
 /* visually hidden */
@@ -178,7 +260,7 @@ body {
   margin: 60px 0 40px;
   text-align: center;
   font-size: 14px;
-  color: #666;
+  color: var(--muted);
 }
 
 .site-footer nav {
@@ -187,12 +269,12 @@ body {
 
 .site-footer a {
   margin: 0 8px;
-  color: #000;
+  color: var(--ink);
   text-decoration: none;
 }
 
 .site-footer a:hover {
-  color: #666666;
+  color: var(--brand-red);
 }
 
 /* products grid */
@@ -217,14 +299,15 @@ body {
 
 .product-card:hover,
 .product-card:focus {
-  border-color: #000;
+  border-color: var(--brand-gold);
   outline: none;
-  box-shadow: 0 0 0 2px #000;
+  box-shadow: 0 0 0 2px var(--brand-gold);
 }
 
+/* selected cards get a red border and a soft gold background */
 .product-card.selected {
-  border: 3px solid #000;
-  background-color: #f3f3f3;
+  border: 3px solid var(--brand-red);
+  background-color: var(--brand-gold-soft);
   padding: 13px;
 }
 
@@ -250,24 +333,29 @@ body {
 
 .product-card p {
   font-size: 14px;
-  color: #666;
+  color: var(--muted);
 }
 
 .details-btn {
   align-self: flex-start;
   margin-top: 10px;
   padding: 6px 8px;
-  border: 1px solid #000;
+  border: 1px solid var(--ink);
   border-radius: 4px;
   background: #fff;
-  color: #000;
+  color: var(--ink);
   font: inherit;
   font-size: 13px;
   cursor: pointer;
 }
 
-.details-btn:focus {
-  outline: 2px solid #000;
+.details-btn:hover {
+  border-color: var(--brand-red);
+  color: var(--brand-red);
+}
+
+.details-btn:focus-visible {
+  outline: 2px solid var(--brand-gold);
   outline-offset: 2px;
 }
 
@@ -285,13 +373,40 @@ body {
 .selected-products {
   margin: 40px 0;
   padding: 20px;
-  border: 2px solid #000;
+  border: 2px solid var(--ink);
   border-radius: 8px;
+}
+
+.selected-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .selected-products h2 {
   font-size: 20px;
-  margin-bottom: 20px;
+}
+
+.clear-btn {
+  padding: 6px 12px;
+  border: 1px solid var(--brand-red);
+  border-radius: 20px;
+  background: #fff;
+  color: var(--brand-red);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.clear-btn[hidden] {
+  display: none;
+}
+
+.clear-btn:hover {
+  background: var(--brand-red);
+  color: #fff;
 }
 
 #selectedProductsList {
@@ -301,7 +416,7 @@ body {
 }
 
 .selected-placeholder {
-  color: #666;
+  color: var(--muted);
   font-size: 14px;
 }
 
@@ -311,9 +426,9 @@ body {
   gap: 8px;
   max-width: 100%;
   padding: 8px 10px;
-  border: 1px solid #000;
+  border: 1px solid var(--brand-gold);
   border-radius: 20px;
-  background: #f3f3f3;
+  background: var(--brand-gold-soft);
   font-size: 14px;
 }
 
@@ -323,15 +438,15 @@ body {
   flex-shrink: 0;
   border: none;
   border-radius: 50%;
-  background: #000;
+  background: var(--brand-red);
   color: #fff;
   cursor: pointer;
 }
 
 .remove-product:hover,
-.remove-product:focus {
-  background: #666;
-  outline: 2px solid #000;
+.remove-product:focus-visible {
+  background: var(--brand-red-dark);
+  outline: 2px solid var(--brand-gold);
   outline-offset: 2px;
 }
 
@@ -341,8 +456,9 @@ body {
   padding: 16px;
   font-size: 18px;
   font-weight: 500;
+  font-family: inherit;
   color: #fff;
-  background: #000;
+  background: var(--brand-red);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -350,9 +466,25 @@ body {
 }
 
 .generate-btn:hover {
-  background: #666;
+  background: var(--brand-red-dark);
+}
+
+.generate-btn:focus-visible {
+  outline: 3px solid var(--brand-gold);
+  outline-offset: 2px;
 }
 
 .generate-btn i {
-  margin-right: 8px;
+  margin-inline-end: 8px;
+}
+
+/* phones and small tablets */
+@media (max-width: 700px) {
+  .search-section {
+    flex-direction: column;
+  }
+
+  .product-card {
+    flex: 1 1 100%;
+  }
 }
