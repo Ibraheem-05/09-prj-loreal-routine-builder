@@ -1,0 +1,14 @@
+{
+  // Deploys the website files AND the chat API as one Cloudflare Worker.
+  // The OpenAI key is NOT here: it is the encrypted secret OPENAI_API_KEY
+  // (set once with: npx wrangler secret put OPENAI_API_KEY).
+  "name": "09-prj-loreal-routine-builder",
+  "main": "worker.js",
+  "compatibility_date": "2026-11-19",
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  }
+}
